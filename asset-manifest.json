@@ -1,16 +1,14 @@
 {
   "files": {
-    "main.css": "/react-spa-example/static/css/main.073c9b0a.css",
-    "main.js": "/react-spa-example/static/js/main.e48f3156.js",
-    "static/js/787.7eec5b36.chunk.js": "/react-spa-example/static/js/787.7eec5b36.chunk.js",
-    "static/media/logo.svg": "/react-spa-example/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/react-spa-example/static/css/main.4da62354.css",
+    "main.js": "/react-spa-example/static/js/main.bea84dc9.js",
+    "static/media/ava2.png": "/react-spa-example/static/media/ava2.a6ef11aa0ebae075631a.png",
     "index.html": "/react-spa-example/index.html",
-    "main.073c9b0a.css.map": "/react-spa-example/static/css/main.073c9b0a.css.map",
-    "main.e48f3156.js.map": "/react-spa-example/static/js/main.e48f3156.js.map",
-    "787.7eec5b36.chunk.js.map": "/react-spa-example/static/js/787.7eec5b36.chunk.js.map"
+    "main.4da62354.css.map": "/react-spa-example/static/css/main.4da62354.css.map",
+    "main.bea84dc9.js.map": "/react-spa-example/static/js/main.bea84dc9.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.e48f3156.js"
+    "static/css/main.4da62354.css",
+    "static/js/main.bea84dc9.js"
   ]
 }
