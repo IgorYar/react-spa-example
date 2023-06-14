@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loading from "./Loading";
 import Post from "./Post";
 import { fetchPostsRequest } from '../slices/postsSlice';
+import Header from "./Header"
 
 function Posts() {
     const dispatch = useDispatch();
@@ -21,10 +22,11 @@ function Posts() {
 
     return (
         <>
-            <h1 style={{textAlign: "center"}}>Posts List</h1>
-            <Container>
-                {posts.map((post) => (
-                    <Row key={post.id} >
+            <Header />
+            <h1 style={{margin: "10px", textAlign: "center", fontWeight: "bold"}}>Posts List</h1>
+            <Container className="posts">
+                {posts.map(post => (
+                    <Row key={post.id}>
                         <Post post={post} />
                     </Row>
                 ))}

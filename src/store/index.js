@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../slices';
 
 import { watchFetchPosts } from '../sagas/postSaga';
+import { watchFetchUser } from '../sagas/userSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,5 +14,6 @@ const store = configureStore({
 });
 
 sagaMiddleware.run(watchFetchPosts);
+sagaMiddleware.run(watchFetchUser);
 
 export default store;

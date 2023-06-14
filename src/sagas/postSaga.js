@@ -1,13 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { fetchPostsRequest, fetchPostsSuccess, fetchPostsFailure } from '../slices/postsSlice.js';
 
-import {
-    fetchPostsRequest,
-    fetchPostsSuccess,
-    fetchPostsFailure,
-} from '../slices/postsSlice.js';
-
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 function* fetchPostsSaga() {
     try {

@@ -3,13 +3,24 @@ import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
 import Avatar from '../assets/ava2.png';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchUserRequest } from '../slices/userSlice';
 
 function Post({post}) {
+    const dispatch = useDispatch();
+
+    const userDetailsHandler = () => {
+        dispatch(fetchUserRequest(post.userId));
+    };
+
     return (
         <Card>
             <Row>
                 <Col md={1}>
-                    <Card.Img src={Avatar} alt="avatar" />
+                    <Link to={`/user/${post.userId}`} onClick={userDetailsHandler}>
+                        <Card.Img src={Avatar} alt="avatar" />
+                    </Link>
                 </Col>
                 <Col md={10}>
                     <Card.Header>
@@ -19,7 +30,7 @@ function Post({post}) {
                         <Card.Text>
                             {post.body}
                         </Card.Text>
-                        <Button variant="primary">Комментарии</Button>
+                        <Button className="fs-5 fw-bold" variant="primary">Comments</Button>
                     </Card.Body>
                 </Col>
             </Row>
