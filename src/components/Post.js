@@ -6,6 +6,8 @@ import Avatar from '../assets/ava2.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUserRequest } from '../slices/userSlice';
+import { fetchCommentsRequest } from '../slices/commentsSlice';
+import PostComments from './PostComments';
 
 function Post({post}) {
     const dispatch = useDispatch();
@@ -13,6 +15,10 @@ function Post({post}) {
     const userDetailsHandler = () => {
         dispatch(fetchUserRequest(post.userId));
     };
+
+    const postCommentsHandler = () => {
+        dispatch(fetchCommentsRequest(post.id));
+    }
 
     return (
         <Card>
@@ -30,7 +36,10 @@ function Post({post}) {
                         <Card.Text>
                             {post.body}
                         </Card.Text>
-                        <Button className="fs-5 fw-bold" variant="primary">Comments</Button>
+                        <Button className="fs-5 fw-bold" variant="primary" onClick={postCommentsHandler}>Comments</Button>
+                        <Row>
+                            <PostComments />
+                        </Row>
                     </Card.Body>
                 </Col>
             </Row>

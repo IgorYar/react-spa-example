@@ -5,6 +5,7 @@ import rootReducer from '../slices';
 
 import { watchFetchPosts } from '../sagas/postSaga';
 import { watchFetchUser } from '../sagas/userSaga';
+import { watchFetchComments } from '../sagas/commentSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,5 +16,6 @@ const store = configureStore({
 
 sagaMiddleware.run(watchFetchPosts);
 sagaMiddleware.run(watchFetchUser);
+sagaMiddleware.run(watchFetchComments);
 
 export default store;
