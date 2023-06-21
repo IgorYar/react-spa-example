@@ -1,9 +1,8 @@
-import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 function Comment({comment}) {
     return (
-        <Card>
+        <Card className="comment my-1">
             <Row>
                 <Col md={10}>
                     <Card.Header>

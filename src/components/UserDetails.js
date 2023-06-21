@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserRequest } from '../slices/userSlice';
+import { fetchPostsSuccess } from '../slices/postsSlice.js';
 import { Card, Row, Col, Button, Container, Pagination } from 'react-bootstrap';
 
 import Loading from './Loading';
-import Post from './Post';
-
-import { fetchUserRequest } from '../slices/userSlice';
-import { fetchPostsSuccess } from '../slices/postsSlice.js';
-
-import Avatar from '../assets/ava2.png';
-import Header from './Header';
 import ErrorAlert from './ErrorAlert';
+import Header from './Header';
+import Post from './Post';
+import Avatar from '../assets/ava.png';
 
 function UserDetails() {
     const { userId } = useParams();
@@ -32,14 +30,6 @@ function UserDetails() {
     const currentPosts = userPosts.slice(indexOfFirstPost, indexOfLastPost);
     const totalPages = Math.ceil(posts.length / postsPerPage);
 
-    // const userPostsTitle = `${user.name}'s Posts List`;
-
-    const navigate = useNavigate();
-
-    const backHandler = () => {
-        navigate('/');
-    }
-
     useEffect(() => {
         dispatch(fetchUserRequest(userId));
     }, [dispatch, userId]);
@@ -57,6 +47,12 @@ function UserDetails() {
             localStorage.setItem(`user_${userId}_posts`, JSON.stringify(userPosts));
         }
     }, [posts, userId]);
+
+    const navigate = useNavigate();
+
+    const backHandler = () => {
+        navigate('/');
+    }
 
     if (loading) {
         return <Loading />;
@@ -85,7 +81,7 @@ function UserDetails() {
                     <Col md={10}>
                         {user && (
                             <>
-                                <Card.Header className="fs-3 fw-bold text-center">User Details</Card.Header>
+                                <Card.Header className="fs-2 fw-bold text-center">User Details</Card.Header>
                                 <Card.Body>
                                     <Card.Title className="fs-3">{user.name}</Card.Title>
                                     <Card.Text className="fs-4">{user.email}</Card.Text>
@@ -96,7 +92,7 @@ function UserDetails() {
                     </Row>
                 </Card>
             </Container>
-            <h2 style={{margin: "10px", textAlign: "center", fontWeight: "bold"}}>User Posts</h2>
+            <h2 className="fs-2 fw-bold text-center">User Posts</h2>
             <Container className="posts">
                 {currentPosts.map(post => (
                     <Row key={post.id}>

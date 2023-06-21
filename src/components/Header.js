@@ -1,18 +1,27 @@
-import React from "react";
+import { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Header() {
+    const [expanded, setExpanded] = useState(false);
+
+    const handleMenuToggle = () => {
+        setExpanded(!expanded);
+    };
+
     return (
         <div className="header">
-            <Navbar bg="dark" variant="dark" className="p-3">
-                <Nav>
-                    <Link className="nav-link fs-2 px-3" to="/">Home</Link>
-                    <Link className="nav-link fs-2 px-3" to="/about">About Me</Link>
-                </Nav>
+            <Navbar expanded={expanded} bg="dark" variant="dark" expand="lg" fixed="top" className="p-3 position-relative">
+                <Navbar.Toggle aria-controls="navbar-nav" onClick={handleMenuToggle} />
+                <Navbar.Collapse id="navbar-nav">
+                    <Nav className="mr-auto">
+                        <Link to="/" className="nav-link fs-2 px-3">Home</Link>
+                        <Link to="/about" className="nav-link fs-2 px-3">About Me</Link>
+                    </Nav>
+                </Navbar.Collapse>    
             </Navbar>
         </div>
     );
-}
+};
 
 export default Header;

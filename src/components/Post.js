@@ -1,23 +1,29 @@
-import React from 'react';
-
-import { Button, Card, Col, Row } from 'react-bootstrap';
-
-import Avatar from '../assets/ava2.png';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserRequest } from '../slices/userSlice';
 import { fetchCommentsRequest } from '../slices/commentsSlice';
-import PostComments from './PostComments';
+import { Link } from 'react-router-dom';
+import { Button, Card, Col, Collapse, Container, Row } from 'react-bootstrap';
+
+import Avatar from '../assets/ava.png';
+import Comment from './Comment';
+
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 function Post({post}) {
     const dispatch = useDispatch();
+
+    const comments = useSelector(state => state.comments.comments);
+
+    const [openComments, setOpenComments] = useState({});
 
     const userDetailsHandler = () => {
         dispatch(fetchUserRequest(post.userId));
     };
 
-    const postCommentsHandler = () => {
-        dispatch(fetchCommentsRequest(post.id));
+    const postCommentsHandler = (id) => {
+        dispatch(fetchCommentsRequest(id));
+        setOpenComments(prevState => ({...prevState, [id]: !prevState[id]}));
     }
 
     return (
@@ -36,10 +42,17 @@ function Post({post}) {
                         <Card.Text>
                             {post.body}
                         </Card.Text>
-                        <Button className="fs-5 fw-bold" variant="primary" onClick={postCommentsHandler}>Comments</Button>
-                        <Row>
-                            <PostComments />
-                        </Row>
+                        <Button className="fs-5 fw-bold btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => postCommentsHandler(post.id)}>Comments</Button>
+                        <Collapse in={openComments[post.id]}>
+                            <Container className="comments">
+                                <h2 className="m-1 fw-bold text-center">Post Comments</h2>
+                                {comments.map(comment => (
+                                    <Row key={comment.id}>
+                                        <Comment comment={comment} />
+                                    </Row>
+                                ))}
+                            </Container>
+                        </Collapse>
                     </Card.Body>
                 </Col>
             </Row>

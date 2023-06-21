@@ -1,20 +1,23 @@
-import React from 'react';
-
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import Header from './Header';
 
 function About() {
     return (
         <>
             <Header />
-            <Card className="about">
-                <Card.Body>
-                    <Card.Title>О себе</Card.Title>
-                    <Card.Text>
-                        Текст
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+            <Container className="m-4 mx-auto fs-4">
+                <Card className="about">
+                    <Card.Body>
+                        <Card.Title className="fs-2">Привет, меня зовут Игорь!</Card.Title>
+                        <Card.Text>
+                            Я работаю в IT с 2014 года. В основном занимался ручным и автоматизированным тестированием, а также Backend-разработкой web-приложений.
+                        </Card.Text>
+                        <Card.Text>
+                            В настоящее время имею огромное желание развиваться во Frontend-разработке и в качестве тренировочного проекта сделал этот небольшой блог.
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Container>
         </>
     );
 };

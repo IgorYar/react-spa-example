@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Row, Container, Pagination } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loading from "./Loading";
-import Post from "./Post";
 import { fetchPostsRequest } from '../slices/postsSlice';
-import Header from "./Header"
+import { Row, Container, Pagination } from "react-bootstrap";
+
+import Loading from "./Loading";
 import ErrorAlert from "./ErrorAlert";
+import Header from "./Header"
+import Post from "./Post";
+
 
 function Posts() {
     const dispatch = useDispatch();
@@ -40,7 +42,7 @@ function Posts() {
     return (
         <>
             <Header />
-            <h1 style={{margin: "10px", textAlign: "center", fontWeight: "bold"}}>Posts List</h1>
+            <h1 className="m-1 fw-bold text-center">Posts List</h1>
             <Container className="posts">
                 {currentPosts.map(post => (
                     <Row key={post.id} className="m-3">
