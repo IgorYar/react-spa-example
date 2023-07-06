@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserRequest } from '../slices/userSlice';
 import { fetchPostsSuccess } from '../slices/postsSlice.js';
 import { Card, Row, Col, Button, Container, Pagination } from 'react-bootstrap';
+import { checkUserLoading, getUser, getUserError } from '../selectors/user';
+import { getPosts } from '../selectors/posts';
+import { MAIN } from '../helpers/url';
 
-import Loading from './Loading';
-import ErrorAlert from './ErrorAlert';
-import Header from './Header';
-import Post from './Post';
+import Loading from '../components/Loading';
+import ErrorAlert from '../components/ErrorAlert';
+import Header from '../components/Header';
+import Post from '../components/Post';
 import Avatar from '../assets/ava.png';
 
 function UserDetails() {
@@ -16,10 +19,10 @@ function UserDetails() {
 
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state.user.user);
-    const loading = useSelector(state => state.user.loading);
-    const posts = useSelector(state => state.posts.posts);
-    const error = useSelector(state => state.user.error);
+    const user = useSelector(getUser);
+    const loading = useSelector(checkUserLoading);
+    const posts = useSelector(getPosts);
+    const error = useSelector(getUserError);
 
     const userPosts = posts.filter(post => post.userId === parseInt(userId));
 
@@ -51,7 +54,7 @@ function UserDetails() {
     const navigate = useNavigate();
 
     const backHandler = () => {
-        navigate('/');
+        navigate(MAIN);
     }
 
     if (loading) {
@@ -70,32 +73,32 @@ function UserDetails() {
         <>
             <Header />
             <Container className="m-4 mx-auto">
-                <Card>
+                <Card className="m-3">
                     <Row>
-                    <Col md={1} >
-                        <Card.Img src={Avatar} alt="avatar" />
-                        <Row className="mt-2 mx-auto">
-                            <Button className="fs-5 fw-bold" onClick={backHandler}>Back</Button>
-                        </Row>
-                    </Col>
-                    <Col md={10}>
-                        {user && (
-                            <>
-                                <Card.Header className="fs-2 fw-bold text-center">User Details</Card.Header>
-                                <Card.Body>
-                                    <Card.Title className="fs-3">{user.name}</Card.Title>
-                                    <Card.Text className="fs-4">{user.email}</Card.Text>
-                                </Card.Body>
-                            </>
-                        )}
-                    </Col>
+                        <Col md={1} >
+                            <Card.Img src={Avatar} alt="avatar" />
+                            <Row className="mt-2 mx-auto">
+                                <Button className="fs-5 fw-bold" onClick={backHandler}>Back</Button>
+                            </Row>
+                        </Col>
+                        <Col md={11}>
+                            {user && (
+                                <>
+                                    <Card.Header className="fs-2 fw-bold text-center">User Details</Card.Header>
+                                    <Card.Body>
+                                        <Card.Title className="fs-2">{user.name}</Card.Title>
+                                        <Card.Text className="fs-3">{user.email}</Card.Text>
+                                    </Card.Body>
+                                </>
+                            )}
+                        </Col>
                     </Row>
                 </Card>
             </Container>
-            <h2 className="fs-2 fw-bold text-center">User Posts</h2>
+            <h2 className="fs-2 fw-bold text-center">User Posts List</h2>
             <Container className="posts">
                 {currentPosts.map(post => (
-                    <Row key={post.id}>
+                    <Row key={post.id} className="m-3">
                         <Post post={post} />
                     </Row>
                 ))}

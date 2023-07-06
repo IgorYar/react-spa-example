@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPostsRequest } from '../slices/postsSlice';
 import { Row, Container, Pagination } from "react-bootstrap";
+import { checkPostsLoading, getPostsError, getPosts } from "../selectors/posts";
 
-import Loading from "./Loading";
-import ErrorAlert from "./ErrorAlert";
-import Header from "./Header"
-import Post from "./Post";
-
+import Loading from "../components/Loading";
+import ErrorAlert from "../components/ErrorAlert";
+import Header from "../components/Header"
+import Post from "../components/Post";
 
 function Posts() {
     const dispatch = useDispatch();
 
-    const posts = useSelector((state) => state.posts.posts);
-    const isLoading = useSelector((state) => state.posts.loading);
-    const error = useSelector((state) => state.posts.error);
+    const posts = useSelector(getPosts);
+    const isLoading = useSelector(checkPostsLoading);
+    const error = useSelector(getPostsError);
 
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
@@ -43,7 +43,7 @@ function Posts() {
         <>
             <Header />
             <h1 className="m-1 fw-bold text-center">Posts List</h1>
-            <Container className="posts">
+            <Container className="posts p-0">
                 {currentPosts.map(post => (
                     <Row key={post.id} className="m-3">
                         <Post post={post} />

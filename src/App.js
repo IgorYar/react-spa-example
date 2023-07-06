@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Posts from "./components/Posts";
-import About from "./components/About";
-import UserDetails from "./components/UserDetails";
+import { ABOUT, MAIN, USER_DETAILS } from "./helpers/url";
+import Posts from "./pages/Posts";
+import About from "./pages/About";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
     return (
         <div className="App">
             <Routes>
-                <Route index element={<Posts />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/user/:userId" element={<UserDetails />} />
+                <Route path={MAIN} element={<Posts />} />
+                <Route path={ABOUT} element={<About />} />
+                <Route path={USER_DETAILS} element={<UserDetails />} />
             </Routes>
       </div>
     );
